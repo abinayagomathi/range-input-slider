@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Hello, world!</title>
+    <style>
+      h4{
+        font-size:18px;
+        color:#708df9;
+        margin-bottom:20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 mx-auto">
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h4>Fixed Expenses</h4>
+              <div class="mb-20">
+                <div class="label-row">
+                  <span class="label-left">College Fees</span>
+                  <span class="label-right float-right text-right">$<span>0</span> / mo</span>
+                </div>
+                <div class="input-range necessities">
+                  <input type="range" class="form-control-range" min="0" max="2000"  id="necessityRange">
+                </div>
+              </div>
+              <div class="mb-20">
+                <div class="label-row">
+                  <span class="label-left">Advance Rent</span>
+                  <span class="label-right float-right text-right">$<span>0</span> / mo</span>
+                </div>
+                <div class="input-range">
+                  <input type="range" class="form-control-range" min="0" max="2000"  id="rentRange">
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h4>Variable Expenses</h4>
+              <div class="mb-20">
+                <div class="label-row">
+                  <span class="label-left">Necessities (food, house, bills)</span>
+                  <span class="label-right float-right text-right">$<span>0</span> / mo</span>
+                </div>
+                <div class="input-range necessities">
+                  <input type="range" class="form-control-range" min="0" max="2000" value="0" id="expensesRange">
+                </div>
+              </div>
+              <div class="mb-20">
+                <div class="label-row">
+                  <span class="label-left">Entertainment</span>
+                  <span class="label-right float-right text-right">$<span>0</span> / mo</span>
+                </div>
+                <div class="input-range">
+                  <input type="range" class="form-control-range" min="0" max="2000" value="0" id="entertainmentRange">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h4>Total</h4>
+              <h2 id="grandtotal">$<span>0</span></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+      function addingtotal(){
+        var neccessityVal = $('#necessityRange').val();
+        neccessityVal = parseInt(neccessityVal);
+        var rentVal = $('#rentRange').val();
+        rentVal = parseInt(rentVal);
+        var expensesVal = $('#expensesRange').val();
+        expensesVal = parseInt(expensesVal);
+        var entertainmentVal = $('#entertainmentRange').val();
+        entertainmentVal = parseInt(entertainmentVal);
+        var totalValue = neccessityVal + rentVal + expensesVal + entertainmentVal;
+        $('#grandtotal span').html(totalValue);
+        
+      }
+      var valueThumb;
+      spendingVal=0;
+      var array = [];
+      $('input[type="range"]').on('change',function(){
+        valueThumb = $(this).val();
+        $(this).parent('.input-range').prev().find('.label-right span').html(valueThumb);
+        spendingVal +=valueThumb;
+        console.log(spendingVal);
+        addingtotal();
+      });
+/*        var totalRangeElements =$('input[type="range"]').length;
+        for(i=0;i<totalRangeElements;i++){
+          $('input[type="range"]').each(function(index,elem){
+            elementValue = $('input[type="range"]').val();
+            array.push(elementValue);
+            console.log(array);
+          });
+        }     */  
+      var valArray = $('input[type="range"]').map(function(i,e){
+                      $(this).val();
+                    }).get();
+      console.log(JSON.stringify(valArray));
+    </script>
+  </body>
+</html>
